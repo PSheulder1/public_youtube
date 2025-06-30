@@ -36,8 +36,10 @@
         <button class="bg-red-500 p-2 rounded-xl text-sm  text-white"><a href="/auth/signup">S'inscrire</a></button>
         {%endif%}
 
-        <div class="h-10 w-10 bg-gray-300 rounded-full"></div>
-
+        {%if profile%}
+        <img src={{profile.image.url}} class="h-10 w-10 bg-gray-300 rounded-full">
+        {%endif%}
+       
         <button>
             <i class="bi bi-bell text-xl"></i>
         </button>
