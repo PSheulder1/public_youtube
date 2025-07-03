@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>YouTube</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-    
+
     <script src="https://cdn.tailwindcss.com"></script>
 </head>
 
@@ -15,52 +15,67 @@
     <header class="flex items-center justify-between 
     px-4 py-2 bg-white shadow w-full fixed z-10">
 
-    <div class="flex items-center gap-2">
-        <button class="md:hidden">
-            <i class="bi bi-list"></i>
-        </button>
+        <div class="flex items-center gap-2">
+            <button class="md:hidden">
+                <i class="bi bi-list"></i>
+            </button>
 
-        <button class="text-3xl text-red-600"><i class="bi bi-youtube"></i></button>
-        <span class="font-bold text-2xl ">YouTube</span>
-    </div>
+            <button class="text-3xl text-red-600"><i class="bi bi-youtube"></i></button>
+            <span class="font-bold text-2xl ">YouTube</span>
+        </div>
 
-    <input type="text" placeholder="search" class="hidden md:block border
+        <input type="text" placeholder="search" class="hidden md:block border
      px-4 py-1 rounded-full w-1/3">
 
-     <div class="flex items-center gap-2">
+        <div class="flex items-center gap-2">
 
-        {% if request.user.is_authenticated%}
-        <button class="border border-neutral-800 p-2 text-sm rounded-xl"><a href="/auth/logout">Deconnecter</a></button>
-        {%else%}
-        <button class="border border-neutral-800 p-2 text-sm  rounded-xl"><a href="/auth/login">Connecter</a></button>
-        <button class="bg-red-500 p-2 rounded-xl text-sm  text-white"><a href="/auth/signup">S'inscrire</a></button>
-        {%endif%}
+            {% if request.user.is_authenticated%}
+            <button class="border border-neutral-800 p-2 text-sm rounded-xl"><a
+                    href="/auth/logout">Deconnecter</a></button>
+            {%else%}
+            <button class="border border-neutral-800 p-2 text-sm  rounded-xl"><a
+                    href="/auth/login">Connecter</a></button>
+            <button class="bg-red-500 p-2 rounded-xl text-sm  text-white"><a href="/auth/signup">S'inscrire</a></button>
+            {%endif%}
 
-        {%if profile%}
-        <img src={{profile.image.url}} class="h-10 w-10 bg-gray-300 rounded-full">
-        {%endif%}
-       
-        <button>
-            <i class="bi bi-bell text-xl"></i>
-        </button>
+            {%if profile%}
+            <img src={{profile.image.url}} class="h-10 w-10 bg-gray-300 rounded-full">
+            {%endif%}
 
-        
+            <button>
+                <i class="bi bi-bell text-xl"></i>
+            </button>
 
-     </div>
+
+
+        </div>
 
     </header>
 
     <aside class="hidden md:block fixed top-14 left-0 w-60 
     h-screen bg-white shadow p-4 overflow-auto">
-    
-    <ul class="space-y-2">
-        <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Home</a></li>
-        <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Trending</a></li>
-        <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Subscription</a></li>
-        <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Library</a></li>
-        <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Playlist</a></li>
 
-    </ul>
+        <ul class="space-y-2">
+            <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Home</a></li>
+            <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Trending</a></li>
+            <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Subscription</a></li>
+            <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Library</a></li>
+            <li><a href="" class="block hover:bg-gray-100 p-2 rounded">Playlist</a></li>
+
+        </ul>
+
+        <h1 class="font-bold mx-1 mt-2">My Channels</h1>
+
+        {%for data in channel%}
+         <div class="flex gap-1 mt-2">
+                    <img src="{{data.image.url}}" class="bg-gray-400 h-8 w-8 rounded-full">
+                    <div>
+                        <h2 class="font-semibold mt-1">{{ data.name }}</h2>
+                    </div>
+        </div>
+        {%endfor%}
+
+    
 
     </aside>
 
@@ -72,7 +87,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -85,7 +100,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -98,7 +113,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -111,7 +126,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -124,7 +139,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -137,7 +152,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -150,7 +165,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -164,7 +179,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -177,7 +192,7 @@
 
                 <div class="flex mt-2 gap-2">
                     <div class="bg-gray-300 w-8 h-8 rounded-full"></div>
-                    
+
                     <div>
                         <h3 class="font-semibold text-sm">equal</h3>
                         <p class="tex-xs text-gray-600">soul messaging . 1M views</p>
@@ -185,20 +200,20 @@
                 </div>
             </div>
 
-            
+
 
         </div>
     </main>
 
 
     <script>
-        document.addEventListener('DOMContentLoaded', ()=>{
+        document.addEventListener('DOMContentLoaded', () => {
 
             const toggleBtn = document.querySelector('header button');
 
             const sidebar = document.querySelector('aside')
 
-            toggleBtn.addEventListener('click', ()=>{
+            toggleBtn.addEventListener('click', () => {
                 sidebar.classList.toggle('hidden');
             })
 
