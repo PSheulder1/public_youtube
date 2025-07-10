@@ -38,3 +38,24 @@ def chaine_details(request, pk):
     channel = get_object_or_404(YoutubeChannel, pk=pk)
 
     return render(request, 'chaine_details.html', {'channel':channel})
+
+
+
+def upload(request, pk):
+    channel = get_object_or_404(YoutubeChannel, pk=pk)
+
+    if request.method=="POST":
+        titre = request.POST.get('titre')
+        description = request.POST.get('description')
+        video = request.FILES.get('video')
+
+        user = request.user
+
+        Video.objects.create(titre=titre,
+                              description=description,
+                              video=video, user=user,
+                                channel=channel)
+        
+
+        return redirect(f"/chaine/details/{pk}")
+    
