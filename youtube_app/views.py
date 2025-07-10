@@ -13,9 +13,11 @@ def home(request):
         profile = None
         channel=None
 
+    allvideos = Video.objects.all()
     context = {
        'profile':profile,
-       'channel' :channel
+       'channel' :channel,
+       'allvideos':allvideos
     }
     return render(request, 'index.html', context)
 
