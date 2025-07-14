@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from authentification_app.models import Profile
-from .models import YoutubeChannel
+from .models import YoutubeChannel, Video
 # Create your views here.
 
 
@@ -39,8 +39,14 @@ def channel(request):
 def chaine_details(request, pk):
     channel = get_object_or_404(YoutubeChannel, pk=pk)
 
-    return render(request, 'chaine_details.html', {'channel':channel})
+    video = Video.objects.filter(user=request.user, channel=channel)
 
+    context = {
+       'channel' :channel,
+       'videos':video,
+    }
+
+    return render(request, 'chaine_details.html', context)
 
 
 def upload(request, pk):
@@ -61,3 +67,4 @@ def upload(request, pk):
 
         return redirect(f"/chaine/details/{pk}")
     
+    return render(request, 'upload.html')
