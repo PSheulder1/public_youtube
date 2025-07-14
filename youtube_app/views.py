@@ -68,3 +68,16 @@ def upload(request, pk):
         return redirect(f"/chaine/details/{pk}")
     
     return render(request, 'upload.html')
+
+
+
+def banner(request, pk):
+    channel = get_object_or_404(YoutubeChannel, pk=pk)
+    if request.method=="POST":
+        image = request.FILES.get('banner')
+        channel.banner=image
+        channel.save()
+
+        return redirect(f"/chaine/details/{pk}")
+    
+    return render(request, 'banner.html')
