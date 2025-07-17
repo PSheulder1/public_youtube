@@ -8,8 +8,9 @@
 </head>
 <body>
     {% include 'header.html'%}
-    <main>
-        <div class="w-full bg-gray-300 h-40"></div>
+    <main class="relative top-[55px]">
+
+        <img src="{{channel.banner.url}}" class="w-full bg-gray-300 h-48" />
 
         <div class="flex items-center gap-4 p-4 bg-white shadow">
             <img src="{{channel.image.url}}" class="h-20 w-20 rounded-full bg-gray-400" />
@@ -20,6 +21,11 @@
                 <div class="flex items-center gap-1">
                     <p class="text-sm text-gray-600 mt-3">1.2M Subscribers</p>
                     <button class="bg-red-500  mt-3 text-white text-sm p-1 rounded">S'abonner</button>
+
+                    <button class="mt-3 text-sm p-1 "><i class="bi bi-plus-circle"></i> <a href="/banner/{{channel.id}}">add banner</a></button>
+                    <button class="mt-3 text-sm p-1 "><i class="bi bi-gear"></i> <a href="/youtube-studio/{{channel.id}}">Go to studio</a></button>
+                   
+                    
                 </div>
 
             </div>
