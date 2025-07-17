@@ -81,3 +81,18 @@ def banner(request, pk):
         return redirect(f"/chaine/details/{pk}")
     
     return render(request, 'banner.html')
+
+
+
+def studio(request,pk):
+    channel = get_object_or_404(YoutubeChannel, pk=pk)
+
+    videos = Video.objects.filter(channel=channel, user=request.user)
+
+    context = {
+        'channel':channel,
+        'videos':videos,
+    }
+    return render(request, 'studio.html', context)
+
+
