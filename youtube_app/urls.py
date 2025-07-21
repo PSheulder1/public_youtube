@@ -1,6 +1,6 @@
 from django.urls import path
 
-from .views import home, channel, chaine_details, upload, banner, studio
+from .views import *
 
 
 urlpatterns =  [
@@ -13,7 +13,9 @@ urlpatterns =  [
 
     path('banner/<int:pk>', banner , name='banner'),
 
-    path('youtube-studio/<int:pk>', studio, name='youtube-studio')
+    path('youtube-studio/<int:pk>', studio, name='youtube-studio'),
+
+    path('update/<int:pk>', update, name='update')
 
 ]
 
