@@ -96,7 +96,7 @@ def studio(request,pk):
     return render(request, 'studio.html', context)
 
 
-def update(request, pk):
+def update(request, pk, channel_id):
     video = get_object_or_404(Video, pk=pk)
     if request.method =="POST":
         video.titre = request.POST.get('titre')
@@ -108,6 +108,7 @@ def update(request, pk):
             video.video = video_data
 
         video.save()
-        return redirect(f"/youtube-studio/{pk}")
+        return redirect(f"/youtube-studio/{channel_id}")
     return render(request, 'update.html', {'video':video})
+
 
