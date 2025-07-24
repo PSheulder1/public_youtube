@@ -96,6 +96,7 @@ def studio(request,pk):
     return render(request, 'studio.html', context)
 
 
+
 def update(request, pk, channel_id):
     video = get_object_or_404(Video, pk=pk)
     if request.method =="POST":
@@ -112,3 +113,15 @@ def update(request, pk, channel_id):
     return render(request, 'update.html', {'video':video})
 
 
+
+def delete(request, pk, channel_id):
+    video = get_object_or_404(Video, pk=pk)
+    if request.method=="POST":
+        video.delete()
+        return redirect(f"/youtube-studio/{channel_id}")
+
+    context = {
+        'video':video,
+        'channel_id':channel_id,
+    }
+    return render(request, 'delete.html', context)
