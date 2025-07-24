@@ -15,7 +15,9 @@ urlpatterns =  [
 
     path('youtube-studio/<int:pk>', studio, name='youtube-studio'),
 
-     path('update/<int:pk>/<int:channel_id>', update, name='update')
+    path('update/<int:pk>/<int:channel_id>', update, name='update'),
+    
+    path('delete/<int:pk>/<int:channel_id>', delete, name='delete'),
 
 ]
 
