@@ -1,1 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+      <script src="https://cdn.tailwindcss.com"></script>
 
+    
+</head>
+<body>
+    <div class="container mx-auto bg-gray-100 shadow-xl
+     p-4 rounded mt-16">
+
+        <h1 class="text-xl font-bold">Are you sure you
+             want to delete this video({{video.titre}})</h1>
+
+             <form action="" method="POST">
+                 {% csrf_token %}
+                <button type="submit" class="p-2 bg-red-600
+                 text-white rounded mt-3">Delete</button>
+
+                   <button type="button" class="p-2 bg-gray-300
+                  rounded mt-3 mx-3"><a href="/youtube-studio/{{channel_id}}">Cancel</a></button>
+             </form>
+
+             
+
+
+    </div>
+</body>
+</html>
