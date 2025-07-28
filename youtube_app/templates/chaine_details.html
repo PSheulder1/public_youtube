@@ -21,8 +21,11 @@
                 <h1 class="text-2xl font-bold">{{channel.name}}</h1>
                
                 <div class="flex items-center gap-1">
-                    <p class="text-sm text-gray-600 mt-3">1.2M Subscribers</p>
-                    <button class="bg-red-500  mt-3 text-white text-sm p-1 rounded">S'abonner</button>
+
+                    <p class="text-sm text-gray-600 mt-3"><span id="count">0</span> Subscribers</p>
+                    <input type="hidden" id="channelID" value="{{channel.id}}">
+
+                    <button class="bg-red-500  mt-3 text-white text-sm p-1 rounded" id="subscribeBtn" onclick="Subscribe()">Subscribe</button>
 
                     <button class="mt-3 text-sm p-1 "><i class="bi bi-plus-circle"></i> <a href="/banner/{{channel.id}}">add banner</a></button>
                     <button class="mt-3 text-sm p-1 "><i class="bi bi-gear"></i> <a href="/youtube-studio/{{channel.id}}">Go to studio</a></button>
@@ -63,5 +66,40 @@
 
         </section>
     </main>
+
+
+
+
+    <script>
+        window.onload = function () {
+            const ChannelID = document.getElementById('channelID').value;
+            fetch(`/chaine/details/${ChannelID}?get_status=true&channel_id=${ChannelID}`)
+            .then(response =>response.json())
+            .then(data=> {
+                document.getElementById('count').textContent = data.subscriber_count;
+                updateButton(data.status)
+            })
+
+
+
+        }
+        function Subscribe() {
+            const ChannelID = document.getElementById('channelID').value;
+            fetch(`/chaine/details/${ChannelID}?subscribe=true&channel_id=${ChannelID}`)
+            .then(response =>response.json())
+            .then(data=> {
+                document.getElementById('count').textContent = data.subscriber_count;
+                updateButton(data.status)
+            })
+
+        }
+
+        function updateButton(status) {
+            const btn  = document.getElementById('subscribeBtn');
+            btn.textContent = (status ==='subscribed') ? 'Unsubscribe' : 'Subscribe';
+        }
+    </script>
+
+
 </body>
 </html>
