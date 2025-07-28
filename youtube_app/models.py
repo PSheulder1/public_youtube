@@ -9,6 +9,7 @@ class YoutubeChannel(models.Model):
     name = models.CharField(max_length=25)
     description = models.TextField(blank=True, null=True)
     image = models.ImageField(upload_to='channel_image/', null=True, blank=True)
+    banner = models.ImageField(upload_to='banner/', null=True, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 
@@ -21,3 +22,10 @@ class Video(models.Model):
     channel = models.ForeignKey(YoutubeChannel, on_delete=models.CASCADE)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+class Subscription(models.Model):
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+    channel=models.ForeignKey(YoutubeChannel, on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f"{self.user.username} subscribe to {self.channel.name}"
