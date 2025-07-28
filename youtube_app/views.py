@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
 
 from authentification_app.models import Profile
-from .models import YoutubeChannel, Video
+from .models import YoutubeChannel, Video, Subscription
+
+from django.http import JsonResponse
 # Create your views here.
 
 
@@ -40,6 +42,46 @@ def chaine_details(request, pk):
     channel = get_object_or_404(YoutubeChannel, pk=pk)
 
     video = Video.objects.filter(user=request.user, channel=channel)
+
+    if request.GET.get('subscribe') =='true':
+        channel_id = request.GET.get('channel_id')
+        
+        youtube_channel = YoutubeChannel.objects.get(pk=channel_id)
+
+        print('channel id : ', channel_id)
+
+        existing = Subscription.objects.filter(user=request.user, channel=channel_id).first()
+
+        if existing:
+            existing.delete()
+            action = 'unsubscribed'
+        else:
+            Subscription.objects.create(user=request.user,  channel=youtube_channel)
+            action = 'subscribed'
+
+        count = Subscription.objects.filter(channel=channel_id).count()
+
+        return JsonResponse({
+            'subscriber_count': count,
+            'status':action,
+        })
+    
+    if request.GET.get('get_status') =='true':
+        channel_id = request.GET.get('channel_id')
+
+        yes = Subscription.objects.filter(user=request.user, channel=channel_id).exists()
+
+        count = Subscription.objects.filter(channel=channel_id).count()
+
+        return JsonResponse({
+          'subscriber_count': count,
+          'status': 'subscribed' if yes else "unsubscribed"
+        })
+
+
+    
+       
+
 
     context = {
        'channel' :channel,
